@@ -9,12 +9,12 @@ spec:
         - action: trigger-ansible
           name: Trigger Ansible Script
           description: Trigger an ansible script to restart a service
-      - problemType: Memory resources exhausted
+    - problemType: Memory resources exhausted
       actionsOnOpen:
         - action: trigger-ansible
           name: Trigger Ansible Script
           description: Trigger an ansible script to restart a service        
-      - problemType: Custom error rate increase
+    - problemType: Custom error rate increase
       actionsOnOpen:
         - action: trigger-ansible
           name: Trigger Ansible Script
