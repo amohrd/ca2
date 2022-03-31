@@ -11,3 +11,16 @@ spec:
           https://webhook.site/48f1ba78-10f7-4b01-8c4c-ade04d3d0e40 "
       subscriptionID: 9441d564-0c5b-47ed-83be-6a3969c94fc5
       sendFinished: true
+    - type: sh.keptn.event.action.triggered
+      requests:
+        - "curl --header 'Authorization: Basic {{.secret.awx.token}}' --header
+          'Content-Type: application/json' --request POST --data
+          '{\\\"extra_vars\\\":{\\\"event_id\\\":\\\"{{.id}}\\\",\\\"type\\\":\\\
+          \"{{.type}}\\\",\\\"sh_keptn_context\\\":\\\"{{.shkeptncontext}}\\\",\
+          \\\"dt_pid\\\":\\\"{{.data.PID}}\\\",\\\"keptn_project\\\":\\\"{{.dat\
+          a.project}}\\\",\\\"keptn_service\\\":\\\"{{.data.service}}\\\",\\\"k\
+          eptn_stage\\\":\\\"{{.data.stage}}\\\"}}''
+          http://ls-ub-lf40a04v.dev.lab.dynatrace.org/api/v2/job_templates/9/la\
+          unch"
+      subscriptionID: e908445d-06c1-4924-b316-42f1505cb9e5
+      sendFinished: false
