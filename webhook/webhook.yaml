@@ -24,3 +24,12 @@ spec:
           unch"
       subscriptionID: e908445d-06c1-4924-b316-42f1505cb9e5
       sendFinished: false
+    - type: sh.keptn.event.action.started
+      requests:
+        - "curl --header 'accountToken: {{.secret.neoload. api-token}}'
+          --request POST
+          https://neoload-api.saas.neotys.com/v3/workspaces/5e3abde2e860a13ca61\
+          9/tests/f61787dd-da45-44f0-9e0d-a76b4a0371e/start?testResultName=Demo\
+          -test-result&testResultDescription=stage-{{.data.stage}}"
+      subscriptionID: 64f9cd01-8be1-4daa-a927-f9a378e3b980
+      sendFinished: false
