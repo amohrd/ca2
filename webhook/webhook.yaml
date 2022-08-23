@@ -34,15 +34,3 @@ spec:
       subscriptionID: 815a5c67-3de4-42d7-ae8c-cb14de44e4b8
       sendFinished: false
       sendStarted: true
-    - type: sh.keptn.event.deployment.triggered
-      requests:
-        - >-
-          curl --header 'Private-Token: {{.env.secret_gitlab_gitaccesstoken}}' --header 'Content-Type: application/json' --request POST --data '{"ref":"main","variables":[{"key":"KEPTN_PROJECT","value":"{{.data.project}}"},{"key":"KEPTN_STAGE","value":"{{.data.stage}}"},{"key":"KEPTN_SERVICE","value":"{{.data.service}}"},{"key":"KEPTN_SHKEPTNCONTEXT","value":"{{.shkeptncontext}}"},{"key":"KEPTN_ID","value":"{{.id}}"}]}' https://gitlab.com/api/v4/projects/38808285/pipeline
-      envFrom:
-        - name: secret_gitlab_gitaccesstoken
-          secretRef:
-            name: gitlab
-            key: gitaccesstoken
-      subscriptionID: 862455ef-34bb-45d9-9f14-b5b4000f1f83
-      sendFinished: false
-      sendStarted: true
