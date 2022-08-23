@@ -6,33 +6,31 @@ spec:
   webhooks:
     - type: sh.keptn.event.action.triggered
       requests:
-        - "curl --request POST --data '{\"problem\":
-          {{.data.problem}},\"action\": \"{{.data.action.action}}\"}'
-          https://webhook.site/48f1ba78-10f7-4b01-8c4c-ade04d3d0e40 "
+        - >-
+          curl --request POST --data '{"problem": {{.data.problem}},"action": "{{.data.action.action}}"}' https://webhook.site/48f1ba78-10f7-4b01-8c4c-ade04d3d0e40 
       subscriptionID: 9441d564-0c5b-47ed-83be-6a3969c94fc5
       sendFinished: true
     - type: sh.keptn.event.action.triggered
       requests:
-        - "curl --header 'Authorization: Basic {{.secret.awx.token}}' --header
-          'Content-Type: application/json' --request POST --data
-          '{\\\"extra_vars\\\":{\\\"event_id\\\":\\\"{{.id}}\\\",\\\"type\\\":\\\
-          \"{{.type}}\\\",\\\"sh_keptn_context\\\":\\\"{{.shkeptncontext}}\\\",\
-          \\\"dt_pid\\\":\\\"{{.data.PID}}\\\",\\\"keptn_project\\\":\\\"{{.dat\
-          a.project}}\\\",\\\"keptn_service\\\":\\\"{{.data.service}}\\\",\\\"k\
-          eptn_stage\\\":\\\"{{.data.stage}}\\\"}}'
-          http://ls-ub-lf40a04v.dev.lab.dynatrace.org/api/v2/job_templates/9/la\
-          unch"
+        - >-
+          curl --header 'Authorization: Basic {{.secret.awx.token}}' --header 'Content-Type: application/json' --request POST --data '{\"extra_vars\":{\"event_id\":\"{{.id}}\",\"type\":\"{{.type}}\",\"sh_keptn_context\":\"{{.shkeptncontext}}\",\"dt_pid\":\"{{.data.PID}}\",\"keptn_project\":\"{{.data.project}}\",\"keptn_service\":\"{{.data.service}}\",\"keptn_stage\":\"{{.data.stage}}\"}}' http://ls-ub-lf40a04v.dev.lab.dynatrace.org/api/v2/job_templates/9/launch
       subscriptionID: e908445d-06c1-4924-b316-42f1505cb9e5
       sendFinished: false
     - type: sh.keptn.event.action.triggered
       requests:
-        - "curl --header 'accountToken: {{.secret.neoload. api-token}}'
-          --request POST --data
-          '{\"client_payload\":{\"type\":\"{{.type}}\",\"project\":\"{{.data.pr\
-          oject}}\",\"service\":\"{{.data.service}}\",\"stage\":\"{{.data.stage\
-          }}\",\"shkeptncontext\":\"{{.shkeptncontext}}\",\"id\":\"{{id}}\"}}'
-          https://neoload-api.saas.neotys.com/v3/workspaces/5e3abde2e860a13ca61\
-          9/tests/f61787dd-da45-44f0-9e0d-a76b4a0371e/start?testResultName=Demo\
-          -test-result&testResultDescription=stage-{{.data.stage}}"
+        - >-
+          curl --header 'accountToken: {{.secret.neoload. api-token}}' --request POST --data '{"client_payload":{"type":"{{.type}}","project":"{{.data.project}}","service":"{{.data.service}}","stage":"{{.data.stage}}","shkeptncontext":"{{.shkeptncontext}}","id":"{{id}}"}}' https://neoload-api.saas.neotys.com/v3/workspaces/5e3abde2e860a13ca619/tests/f61787dd-da45-44f0-9e0d-a76b4a0371e/start?testResultName=Demo-test-result&testResultDescription=stage-{{.data.stage}}
       subscriptionID: 64f9cd01-8be1-4daa-a927-f9a378e3b980
       sendFinished: false
+    - type: sh.keptn.event.deployment.triggered
+      requests:
+        - >-
+          curl --header 'Private-Token : {{.env.secret_gitlab_gitaccesstoken}}' --header 'Content-Type: application/json' --request POST --data '{"ref":"main","variables":[{"key":"KEPTN_PROJECT","value":"{{.data.project}}"},{"key":"KEPTN_STAGE","value":"{{.data.stage}}"},{"key":"KEPTN_SERVICE","value":"{{.data.service}}"},{"key":"KEPTN_SHKEPTNCONTEXT","value":"{{.shkeptncontext}}"},{"key":"KEPTN_ID","value":"{{.id}}"}]}' https://gitlab.com/api/v4/projects/38808285/pipeline
+      envFrom:
+        - name: secret_gitlab_gitaccesstoken
+          secretRef:
+            name: gitlab
+            key: gitaccesstoken
+      subscriptionID: 815a5c67-3de4-42d7-ae8c-cb14de44e4b8
+      sendFinished: false
+      sendStarted: true
