@@ -9,6 +9,8 @@ spec:
       - name: "delivery"
         tasks: 
         - name: "deployment"
+          triggeredOn:
+          - event: "dev.delivery.triggered"
         - name: "release"
     - name: "hardening"
     - name: "production"
