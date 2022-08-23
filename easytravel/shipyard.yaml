@@ -7,6 +7,8 @@ spec:
     - name: "dev"
       sequences:
       - name: "delivery"
+        triggeredOn:
+        - event: "dev.delivery.finished"
         tasks: 
         - name: "deployment"
         - name: "test"
