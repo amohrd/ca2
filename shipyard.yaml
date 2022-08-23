@@ -4,6 +4,13 @@ metadata:
   name: "easytravel"
 spec:
   stages:
+    - name: "dev"
+      sequences:
+      - name: "delivery"
+        tasks: 
+        - name: "deployment"
+        - name: "release"
+    - name: "hardening"
     - name: "production"
       sequences:
         - name: "remediation"
