@@ -7,15 +7,16 @@ spec:
     - name: "dev"
       sequences:
       - name: "delivery"
+        triggeredOn:
+          - event: "dev.delivery.triggered"
         tasks: 
         - name: "deployment"
         - name: "release"
-
     - name: "hardening"
       sequences:
       - name: "delivery"
         triggeredOn:
-          - event: "dev.delivery.finished"
+          - event: "dev.delivery.triggered"
         tasks: 
         - name: "deployment"
         - name: "release"
