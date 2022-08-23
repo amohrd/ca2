@@ -6,17 +6,28 @@ spec:
   stages:
     - name: "dev"
       sequences:
-      - name: "delivery"
-        triggeredOn:
-          - event: "dev.delivery.triggered"      
-        tasks: 
-        - name: "deployment"
-        - name: "release"
-    - name: "hardening"
+        - name: "delivery"
+          tasks:
+            - name: "deployment"
+              properties:
+                deploymentstrategy: "direct"
+            - name: "test"
+              properties:
+                teststrategy: "functional"
+            - name: "evaluation"
+            - name: "release"
+
+    - name: "staging"
       sequences:
-      - name: "delivery"
-        triggeredOn:
-          - event: "dev.delivery.triggered"
-        tasks: 
-        - name: "deployment"
-        - name: "release"
+        - name: "delivery"
+          triggeredOn:
+            - event: "dev.delivery.finished"
+          tasks:
+            - name: "deployment"
+              properties:
+                deploymentstrategy: "blue_green_service"
+            - name: "test"
+              properties:
+                teststrategy: "performance"
+            - name: "evaluation"
+            - name: "release"
